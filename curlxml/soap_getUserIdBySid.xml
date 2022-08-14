@@ -1,0 +1,7 @@
+<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ilUserAdministration">
+    <x:Body>
+        <getUserIdBySid>
+            <sid>XXXXXXXXXXXXXXXXXXXXXXXXXX::UNIMR</sid>
+        </getUserIdBySid>
+    </x:Body>
+</x:Envelope>

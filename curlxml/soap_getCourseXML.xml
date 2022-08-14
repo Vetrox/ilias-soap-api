@@ -1,0 +1,8 @@
+<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ilUserAdministration">
+    <x:Body>
+        <getCourseXML>
+            <sid>XXXXXXXXXXXXXXXXXXXXXXXXXX::UNIMR</sid>
+            <course_id>XXXXXXX</course_id>
+        </getCourseXML>
+    </x:Body>
+</x:Envelope>

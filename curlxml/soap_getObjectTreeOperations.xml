@@ -1,0 +1,9 @@
+<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ilUserAdministration">
+    <x:Body>
+        <getObjectTreeOperations>
+            <sid>XXXXXXXXXXXXXXXXXXXXXXXXXX::UNIMR</sid>
+            <ref_id>XXXXXXX</ref_id>
+            <user_id>XXXXXXX</user_id>
+    </getObjectTreeOperations>
+    </x:Body>
+</x:Envelope>

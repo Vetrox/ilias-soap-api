@@ -1,0 +1,8 @@
+<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ilUserAdministration">
+    <x:Body>
+        <getCoursesForUser>
+            <sid>XXXXXXXXXXXXXXXXXXXXXXXXXX::UNIMR</sid>
+            <parameters>&lt;?xml version="1.0"?&gt;&lt;result&gt;&lt;colspec name="user_id" /&gt;&lt;colspec name="status" /&gt;&lt;row&gt;&lt;column&gt;XXXXXXX&lt;/column&gt;&lt;column&gt;15&lt;/column&gt;&lt;/row&gt;&lt;/result&gt;</parameters>
+        </getCoursesForUser>
+    </x:Body>
+</x:Envelope>

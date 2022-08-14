@@ -1,0 +1,10 @@
+<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ilUserAdministration">
+    <x:Header/>
+    <x:Body>
+        <login>
+            <client>UNIMR</client>
+            <username>XX</username>
+            <password>XX</password>
+        </login>
+    </x:Body>
+</x:Envelope>
