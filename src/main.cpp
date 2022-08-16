@@ -10,57 +10,59 @@
 #include <stdlib.h>
 #include <errno.h>
 #include "stdio.h"
-
+#include <string>
 
 #define IPADDR "93.184.216.34" // example.com
 
+std::string request(const char*, std::string, std::string);
+
 int main() {
-    int CreateSocket = 0, n = 0;
+    std::string resp = request(IPADDR, "example.com", "/");
+    std::cout << resp << std::endl;
+}
+
+std::string request(const char* ip, std::string domain, std::string path) {
+    int sck = 0;
     char data[1024];
-    const char* send_payload = 
-        "GET / HTTP/1.0\n"
-        "Host: example.com\n" "\n"; // has to end with double newline
+    std::string send_payload = 
+        "GET " + path + " HTTP/1.0\n"
+        "Host: " + domain + "\n" "\n"; // has to end with double newline
 
     struct sockaddr_in ipOfServer;
     memset(data, '0' ,sizeof(data));
  
-    if((CreateSocket = socket(AF_INET, SOCK_STREAM, 0))< 0)
-    {
+    if ((sck = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("Socket not created \n");
-        return 1;
+        abort();
     }
-    
+
     ipOfServer.sin_family = AF_INET;
     ipOfServer.sin_port = htons(80);
-    ipOfServer.sin_addr.s_addr = inet_addr(IPADDR);
+    ipOfServer.sin_addr.s_addr = inet_addr(ip);
  
-    std::cout << "Connecting" << std::endl;
-    if(connect(CreateSocket, (struct sockaddr *)& ipOfServer, sizeof(ipOfServer))<0)
-    {
+    std::cout << "INFO: Connecting to " << ip << std::endl;
+    if (connect(sck, (struct sockaddr*)& ipOfServer, sizeof(ipOfServer)) < 0) {
         printf("Connection failed due to port and ip problems\n");
-        return 1;
+        abort();
     }
 
-    std::cout << "Sending data..." << std::endl;
+    std::cout << "INFO: Sending request..." << std::endl;
     std::cout << send_payload << "%%%%%%"<< std::endl;
-    write(CreateSocket, send_payload, strlen(send_payload));
+    write(sck, send_payload.c_str(), send_payload.length());
 
-    std::cout << "Waiting for data..." << std::endl;
-    while((n = read(CreateSocket, data, sizeof(data)-1)) > 0)
-    {
-        data[n] = 0;
-        if(fputs(data, stdout) == EOF)
-        {
-            printf("\nStandard output error");
+    std::cout << "INFO: Waiting for data..." << std::endl;
+    std::string resp = "";
+    while (true) {
+        int n = read(sck, data, sizeof(data)-1);
+        if (n == 0) { 
+            close(sck);
+            return resp;
         }
- 
-        printf("\n");
+        if (n < 0) {
+            std::cout << "ERROR: Standard input error" << std::endl;
+            abort();
+        }
+        data[n] = 0; // ending \0 character
+        resp += data;
     }
- 
-    if( n < 0)
-    {
-        printf("Standard input error \n");
-    }
- 
-    return 0;
 }
